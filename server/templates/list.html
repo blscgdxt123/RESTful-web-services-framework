@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>FillinInformation</title>
+        <!-- optional styling to this site -->
+        <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap-combined.min.css" rel="stylesheet" />
+        <style type="text/css">
+        body{display: flex;justify-content: center;}
+        label{ width: 150px;display: inline-block;text-align: right;}
+        .box{
+          width: 500px;
+          height: 500px;
+          justify-content: center;
+          display: fixed;
+          align-items: justify;
+          position: relative;
+          top: 50px;
+        }
+        </style>
+    </head>
+    <body>
+      <div class="box">
+        <h2>Personal Information Collection System</h2>
+        
+        <p>
+          Please enter your personal information below:
+        </p>
+
+        <form action="{@host}/information" method="post">
+          <label>name:</label>
+          <input type="text" id="stu_name" name="name" value="" placeholder="No more than 8 Chinese characters" required="true" maxlength="8" pattern="[\u4e00-\u9fa5]{1,8}" style="border:3px solid #369; margin-top: 5px;"/><br>
+          <label>student id:</label>
+          <input type="text" id="stu_id" name="studentid" value="" placeholder="13 digits" required="true" pattern="^\d{13}$" style="border:2px solid #369; margin-top: 5px;"/><br>
+          <label>email:</label>
+          <input type="email" id="stu_email" name="email" value="" required="true" placeholder="Please enter your email address" pattern="\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" style="border:2px solid #369; margin-top: 5px;"/><br>
+          <label>telephone number:</label>  
+          <input type="text" id="stu_phone" name="phone" value="" placeholder="11 digits" required="true" pattern="^1[0-9]{10}$" style="border:2px solid #369; margin-top: 5px;"/><br>     
+          <label>hobby:</label>  
+          <textarea type="textarea" id="stu_hobby" name="hobby" required="true" maxlength="32"  placeholder="No more than 32 Chinese characters" style="width: 300px; height: 100px; border:2px solid #369; margin-top: 5px;" value="" ></textarea><br>
+            <input type="submit" />
+        </form>
+
+        <div>
+          <p>
+            Some other people's information:
+          </p>
+          {@messages}
+        </div>
+
+        <p class="links">
+          <a href="{@host}/">Home</a>
+        </p>
+        
+      </div>
+    </body>
+    <!-- optional enhancement -->
+    <script>
+      //name
+        function invalidFun1(e){
+          var tag = e.target ; // label
+          if(tag.validity.valueMissing){stu_name.setCustomValidity("Name cannot be empty!");}
+          else if(tag.validity.patternMismatch){stu_name.setCustomValidity("The name must be Chinese and no more than eight digits~");}
+          else{stu_name.setCustomValidity("Other errors");}
+        };
+        // invalid  Input content error event. Include, is empty, malformed, etc
+        stu_name.addEventListener("invalid" ,invalidFun1,false);
+        
+        function invalidFun2(e){
+          var tag = e.target ; // label
+          if(tag.validity.valueMissing){stu_id.setCustomValidity("Student ID cannot be empty!");}
+          else if(tag.validity.patternMismatch){stu_id.setCustomValidity("The student id must be thirteen digits~");}
+          else{stu_id.setCustomValidity("Other errors");}
+        };
+        // invalid  Input content error event. Include, is empty, malformed, etc
+        stu_id.addEventListener("invalid" ,invalidFun2,false);
+        
+        function invalidFun3(e){
+          var tag = e.target ; // label
+          if(tag.validity.valueMissing){stu_email.setCustomValidity("The email cannot be empty!");}
+          else if(tag.validity.patternMismatch){stu_email.setCustomValidity("You must adhere to the canonical mailbox format~");}
+          else{stu_email.setCustomValidity("Other errors");}
+        };
+        // invalid  Input content error event. Include, is empty, malformed, etc
+        stu_email.addEventListener("invalid" ,invalidFun3,false);
+                    
+        function invalidFun4(e){
+          var tag = e.target ; // label
+          if(tag.validity.valueMissing){stu_phone.setCustomValidity("The mobile phone number cannot be empty!");}
+          else if(tag.validity.patternMismatch){stu_phone.setCustomValidity("Please fill in the correct mobile phone number~");}
+          else{stu_phone.setCustomValidity("Other errors");}
+        };
+        // invalid  Input content error event. Include, is empty, malformed, etc
+        stu_phone.addEventListener("invalid" ,invalidFun4,false); 
+      
+        function invalidFun5(e){
+          var tag = e.target ; // label
+          if(tag.validity.valueMissing){stu_hobby.setCustomValidity("Personal interests cannot be empty!");}
+          else if(tag.validity.patternMismatch){stu_hobby.setCustomValidity("Interest content cannot exceed 32 words~");}
+          else{stu_hobby.setCustomValidity("Other errors");}
+        };
+        // invalid  Input content error event. Include, is empty, malformed, etc
+        stu_hobby.addEventListener("invalid" ,invalidFun5,false); 
+
+
+         // If there are no errors when entering, you must cancel the custom error prompt, otherwise the form cannot be submitted
+         function  validFun1(e){
+           var tag = e.target ; // label
+           console.info(tag.validity);
+           stu_name.setCustomValidity("");
+          }
+         stu_name.addEventListener("input" ,validFun1,false);
+         function  validFun2(e){
+           var tag = e.target ; // label
+           console.info(tag.validity);
+           stu_id.setCustomValidity("");
+          }
+         stu_id.addEventListener("input" ,validFun2,false);
+         function  validFun3(e){
+           var tag = e.target ; // label
+           console.info(tag.validity);
+           stu_email.setCustomValidity("");
+          }
+         stu_email.addEventListener("input" ,validFun3,false);
+         function  validFun4(e){
+           var tag = e.target ; // label
+           console.info(tag.validity);
+           stu_phone.setCustomValidity("");
+          }
+         stu_phone.addEventListener("input" ,validFun4,false);
+         function  validFun5(e){
+           var tag = e.target ; // label
+           console.info(tag.validity);
+           stu_hobby.setCustomValidity("");
+          }
+         stu_hobby.addEventListener("input" ,validFun5,false);
+    </script>
+
+    <script src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/js/bootstrap.min.js"></script>
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script src="{@host}/script.js"></script>
+</html>
